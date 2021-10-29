@@ -1,0 +1,25 @@
+{
+  "name": "habilidadesprofissionais",
+  "version": "1.0.0",
+  "description": "Site direcionado à gestão de habilidades de pessoas, adequando cada uma para cada projeto.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichcm/habilidadesProfissionais.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichcm/habilidadesProfissionais/issues"
+  },
+  "homepage": "https://github.com/nichcm/habilidadesProfissionais#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
