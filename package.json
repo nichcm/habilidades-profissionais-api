@@ -2,8 +2,9 @@
   "name": "habilidadesprofissionais",
   "version": "1.0.0",
   "description": "Site direcionado à gestão de habilidades de pessoas, adequando cada uma para cada projeto.",
-  "main": "index.js",
+  "main": "./api/index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,9 +18,13 @@
   },
   "homepage": "https://github.com/nichcm/habilidadesProfissionais#readme",
   "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.14"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3-rc.0",
+    "nodemon": "^2.0.14",
+    "path": "^0.12.7",
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.3.0"
   }
 }
