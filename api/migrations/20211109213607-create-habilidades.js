@@ -17,6 +17,13 @@ module.exports = {
       tipoCategoria: {
         type: Sequelize.STRING
       },
+
+      categoria_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {model: 'categorias', key: 'id'}
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
