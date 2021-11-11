@@ -14,17 +14,23 @@ module.exports = {
       nivel: {
         type: Sequelize.STRING
       },
+      
+      experiencia: {
+        type: Sequelize.STRING
+      },
 
       habilidades_id:{
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'habilidades', key: 'id'}
+        references: {model: 'habilidades', key: 'id'},
+        primaryKey: true
       },
 
       pessoas_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'pessoas', key: 'id'}
+        references: {model: 'pessoas', key: 'id'},
+        primaryKey: true
       },
       
     });

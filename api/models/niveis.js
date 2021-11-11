@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Niveis.init({
-    nivel: DataTypes.STRING
+    nivel: DataTypes.STRING,
+    experiencia: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Niveis',
