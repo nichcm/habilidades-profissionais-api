@@ -8,4 +8,8 @@ router
  .post('/habilidades', HabilidadeController.criaHabilidade)
  .put('/habilidades/:id', HabilidadeController.atualizaHabilidade)
  .delete('/habilidades/:id', HabilidadeController.apagaHabilidade)
+
+
+.get('/habilidades/habilidade:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
+
 module.exports = router

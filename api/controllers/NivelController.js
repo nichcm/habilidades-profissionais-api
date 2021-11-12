@@ -16,6 +16,17 @@ class NivelController {
       }
     }
 
+    static async pegaUmNivel(req, res){
+      const { pessoaId, habilidadeId } =  req.params
+
+      try{
+          const umaNivel = await database.Nivel.findOne({ where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeid)} })
+          return res.status(200).json(umaNivel)
+      } catch (erro){
+          return res.status(500).json(error.message)
+      }
+  }
+
 
     //POST cria nivel
     //http://localhost:3000/niveis/pessoa/:pessoaid/habilidade/:habilidadeid
@@ -33,10 +44,38 @@ class NivelController {
       }
     }
 
+
+
+
     //Deleta Nivel
-    //http://localhost:3000/niveis
+    //http://localhost:3000/niveis/pessoa/:pessoaid/habilidade/:habilidadeid
+
+    static async apagaNivel (req, res) {
+      const { pessoaId, habilidadeid } =  req.params
+      try {
+          await database.Nivel.destroy( { where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeid)} })
+          return res.status(200).json({ mensagem: `nivel de habilidade_id: ${habilidadeId} da pessoa:${pessoaId}  deletado` })
+      } catch (error) {
+          return res.status(500).json(error.message)
+      }
+    }
 
 
+
+    static async atualizaNivel(req, res){
+      const { pessoaId, habilidadeid } =  req.params
+      const novasInfos = req.body
+
+      try {
+          await database.Nivel.update(novasInfos, { where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeid)} })
+          const nivelAtualizado = await database.Nivel.findOne({ where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeid)} })
+          return res.status(200).json(nivelAtualizado)
+
+      } catch (error) {
+          return res.status(500).json(error.message)
+      }
+      
+  }
 
 
 
