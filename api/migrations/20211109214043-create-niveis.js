@@ -22,14 +22,14 @@ module.exports = {
       habilidades_id:{
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'habilidades', key: 'id'},
+        references: {model: 'Habilidades', key: 'id'},
         primaryKey: true
       },
 
       pessoas_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'pessoas', key: 'id'},
+        references: {model: 'Pessoas', key: 'id'},
         primaryKey: true
       },
       

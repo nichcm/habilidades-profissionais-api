@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Niveis',
+    timestamps: false,
+    underscored: true,
   });
   return Niveis;
 };

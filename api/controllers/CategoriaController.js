@@ -4,7 +4,7 @@ class CategoriaController {
 
     static async pegaTodasAsCategorias(req, res) {
       try {
-        const todasAsCategorias = await database.Categoria.findAll()
+        const todasAsCategorias = await database.Categorias.findAll()
         return res.status(200).json(todasAsCategorias)
       } catch (error) {
         return res.status(500).json(error.message);
@@ -15,7 +15,7 @@ class CategoriaController {
         const { id } =  req.params
 
         try{
-            const umaCategoria = await database.Habilidades.findOne({ where: { id: Number(id) } })
+            const umaCategoria = await database.Categorias.findOne({ where: { id: Number(id) } })
             return res.status(200).json(umaCategoria)
         } catch (erro){
             return res.status(500).json(error.message)
@@ -25,7 +25,7 @@ class CategoriaController {
     static async criaCategoria(req, res){
         const novaCategoria = req.body
         try{
-            const novaCategoriaCriada = await database.Categoria.create(novaCategoria)
+            const novaCategoriaCriada = await database.Categorias.create(novaCategoria)
             return res.status(200).json(novaCategoriaCriada)
 
         }catch (error){
@@ -38,8 +38,8 @@ class CategoriaController {
         const novasInfos = req.body
 
         try {
-            await database.Categoria.update(novasInfos, { where: { id: Number(id) } })
-            const categoriaAtualizada = await database.Pessoas.findOne({ where: { id: Number(id) } })
+            await database.Categorias.update(novasInfos, { where: { id: Number(id) } })
+            const categoriaAtualizada = await database.Categorias.findOne({ where: { id: Number(id) } })
             return res.status(200).json(categoriaAtualizada)
 
         } catch (error) {
@@ -52,7 +52,7 @@ class CategoriaController {
     static async apagaCategoria (req, res) {
         const { id } =  req.params
         try {
-            await database.Categoria.destroy( { where: { id: Number(id) } } )
+            await database.Categorias.destroy( { where: { id: Number(id) } } )
             return res.status(200).json({ mensagem: `id ${id} deletado` })
         } catch (error) {
             return res.status(500).json(error.message)
@@ -61,3 +61,5 @@ class CategoriaController {
     }
 
 }
+
+module.exports = CategoriaController

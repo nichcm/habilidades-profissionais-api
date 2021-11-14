@@ -1,15 +1,15 @@
 const { Router } = require('express')
-const CategoriaController = require('../controllers/CategoriaController')
+const HabilidadeController = require('../controllers/HabilidadeController')
 
 const router = Router()
-router
- .get('/habilidades', HabilidadeController.pegaTodosAsHabilidades)
- .get('/habilidades/:id', HabilidadeController.pegaUmaHabilidade)
- .post('/habilidades', HabilidadeController.criaHabilidade)
- .put('/habilidades/:id', HabilidadeController.atualizaHabilidade)
- .delete('/habilidades/:id', HabilidadeController.apagaHabilidade)
+
+router.get('/habilidades', HabilidadeController.pegaTodasAsHabilidades)
+router.get('/habilidades/:id', HabilidadeController.pegaUmaHabilidade)
+router.post('/habilidades', HabilidadeController.criaHabilidade)
+router.put('/habilidades/:id', HabilidadeController.atualizaHabilidade)
+router.delete('/habilidades/:id', HabilidadeController.apagaHabilidade)
 
 
-.get('/habilidades/habilidade:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
+router.get('/habilidades/habilidade:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
 
 module.exports = router

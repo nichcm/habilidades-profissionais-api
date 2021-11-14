@@ -6,7 +6,7 @@ class NivelController {
 
     //pega todos os niveis
     //http://localhost:3000/niveis
-    static async pegaTodasOsNiveis(req, res) {
+    static async pegaTodosOsNiveis(req, res) {
 
       try {
         const todasOsNiveis= await database.Nivel.findAll()
@@ -73,11 +73,8 @@ class NivelController {
 
       } catch (error) {
           return res.status(500).json(error.message)
-      }
-      
+      } 
   }
-
-
-
-
 }
+
+module.exports = NivelController

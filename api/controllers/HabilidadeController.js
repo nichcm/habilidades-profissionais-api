@@ -1,6 +1,6 @@
 const database = require('../models')
 
-class habilidadeController {
+class HabilidadeController {
 
   // relações de apenas habilidades
   static async pegaTodasAsHabilidades(req,res){
@@ -71,15 +71,15 @@ static async apagaHabilidade (req, res) {
 //filtro pra pegar a habilidade e niveis de todas as pessoas, melhor para o gestar pegar
 
 static async pegaTodasAsPessoasDaMesmaHabilidade(req,res){
-  const { Habilidade_id } =  req.params
+    const { Habilidade_id } =  req.params
 
-  try {
-      const TodasAsHabilidadesDasPessoas = await database.Niveis.findAll({ where: {habilidade_id: Number(Habilidade_id)}})
-      return res.status(200).json(TodasAsHabilidadesDasPessoas)
-  }catch(error){
-      return res.status(500).json(error.message)
-  }
+        try {
+            const TodasAsHabilidadesDasPessoas = await database.Niveis.findAll({ where: {habilidade_id: Number(Habilidade_id)}})
+            return res.status(200).json(TodasAsHabilidadesDasPessoas)
+        }catch(error){
+            return res.status(500).json(error.message)
+        }
+    }
 }
 
-
-}
+module.exports = HabilidadeController

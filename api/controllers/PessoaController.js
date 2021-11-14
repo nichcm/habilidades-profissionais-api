@@ -96,11 +96,11 @@ class PessoaController{
     //http://localhost:3000/pessoas/:pessoaId/habilidade
 
     static async criaHabilidadeParaPessoa(req, res){
+        const { pessoaId } =  req.params
         const novaHabilidade = req.body
         try{
-            const novaHabilidadeCriada = await database.Niveis.create(novaHabilidade)
+            const novaHabilidadeCriada = await database.Niveis.create({ where: { pessoa_id: Number(pessoaId)}}, novaHabilidade)
             return res.status(200).json(novaHabilidadeCriada)
-
         }catch (error){
             return res.status(500).json(error.message)
         }
@@ -136,21 +136,7 @@ class PessoaController{
         } catch (error) {
             return res.status(500).json(error.message)
         }
-
     }
-
-    
-
-
-
-
-
-
-
-
-
-
-
 }
 
 module.exports = PessoaController

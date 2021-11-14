@@ -21,10 +21,11 @@ module.exports = (sequelize, DataTypes) => {
   Habilidades.init({
     titulo: DataTypes.STRING,
     descricao: DataTypes.STRING,
-    tipoCategoria: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Habilidades',
+    timestamps: false,
+    underscored: true,
   });
   return Habilidades;
 };
