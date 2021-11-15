@@ -66,11 +66,11 @@ class PessoaController{
 
 
     //Relações Micro com Habilidades
-    //http://localhost:3000/pessoas/:pessoaId/habilidade/habilidade:id
+    //http://localhost:3000/pessoas/:pessoaId/habilidade/:habilidadeid
     static async pegaUmaPessoaUmaHabilidade(req, res){
         const { pessoaId, habilidadeId } =  req.params
         try{
-            const umaPessoaHabilidade = await database.Niveis.findOne({ where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeId) } })
+            const umaPessoaHabilidade = await database.Niveis.findOne({ where: { pessoas_id: pessoaId, habilidades_id: habilidadeId } })
             return res.status(200).json(umaPessoaHabilidade)
         } catch (erro){
             return res.status(500).json(error.message)
@@ -80,12 +80,11 @@ class PessoaController{
 
     //metodo GET
     //http://localhost:3000/pessoas/:pessoaId/habilidade
-
     static async pegaTodasAsHabilidadesDaPessoa(req,res){
-        const { pessoa_id } =  req.params
+        const { pessoaId } =  req.params
 
         try {
-            const TodasAsHabilidadesDaPessoa = await database.Niveis.findAll({ where: {pessoa_id: Number(pessoaId)}})
+            const TodasAsHabilidadesDaPessoa = await database.Niveis.findAll({ where: {pessoas_id: pessoaId}})
             return res.status(200).json(TodasAsHabilidadesDaPessoa)
         }catch(error){
             return res.status(500).json(error.message)
@@ -99,7 +98,13 @@ class PessoaController{
         const { pessoaId } =  req.params
         const novaHabilidade = req.body
         try{
-            const novaHabilidadeCriada = await database.Niveis.create({ where: { pessoa_id: Number(pessoaId)}}, novaHabilidade)
+            const novaHabilidadeCriada = await database.Niveis.create(
+                {
+                    pessoas_id: pessoaId,
+                    habilidades_id: novaHabilidade.habilidades_id, 
+                    experiencia: novaHabilidade.experiencia, 
+                    nivel: novaHabilidade.nivel
+                })
             return res.status(200).json(novaHabilidadeCriada)
         }catch (error){
             return res.status(500).json(error.message)
@@ -115,8 +120,8 @@ class PessoaController{
         const novasInfos = req.body
 
         try {
-            await database.Niveis.update(novasInfos, { where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeId) } })
-            const HabilidadeDapessoaAtualizada = await database.Niveis.findOne({ where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeId) } })
+            await database.Niveis.update(novasInfos, { where: { pessoas_id: Number(pessoaId), habilidades_id: Number(habilidadeId) } })
+            const HabilidadeDapessoaAtualizada = await database.Niveis.findOne({ where: { pessoas_id: Number(pessoaId), habilidades_id: Number(habilidadeId) } })
             return res.status(200).json(HabilidadeDapessoaAtualizada)
 
         } catch (error) {
@@ -131,7 +136,7 @@ class PessoaController{
     static async apagaHabilidadeDaPessoa (req, res) {
         const { pessoaId, habilidadeId } =  req.params
         try {
-            await database.Niveis.destroy( { where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeId) } } )
+            await database.Niveis.destroy( { where: { pessoas_id: Number(pessoaId), habilidades_id: Number(habilidadeId) } } )
             return res.status(200).json({ mensagem: `habilidade_id: ${habilidadeId} da pessoa:${pessoaId}  deletado` })
         } catch (error) {
             return res.status(500).json(error.message)

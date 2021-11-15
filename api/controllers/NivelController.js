@@ -20,7 +20,7 @@ class NivelController {
       const { pessoaId, habilidadeId } =  req.params
 
       try{
-          const umaNivel = await database.Nivel.findOne({ where: { pessoa_id: Number(pessoaId), habilidade_id: Number(habilidadeid)} })
+          const umaNivel = await database.Nivel.findOne({ where: { pessoas_id: Number(pessoaId), habilidade_id: Number(habilidadeid)} })
           return res.status(200).json(umaNivel)
       } catch (erro){
           return res.status(500).json(error.message)

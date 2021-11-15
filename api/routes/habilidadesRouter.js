@@ -10,6 +10,6 @@ router.put('/habilidades/:id', HabilidadeController.atualizaHabilidade)
 router.delete('/habilidades/:id', HabilidadeController.apagaHabilidade)
 
 
-router.get('/habilidades/habilidade:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
+router.get('/habilidades/:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
 
 module.exports = router

@@ -71,10 +71,10 @@ static async apagaHabilidade (req, res) {
 //filtro pra pegar a habilidade e niveis de todas as pessoas, melhor para o gestar pegar
 
 static async pegaTodasAsPessoasDaMesmaHabilidade(req,res){
-    const { Habilidade_id } =  req.params
+    const { id } =  req.params
 
         try {
-            const TodasAsHabilidadesDasPessoas = await database.Niveis.findAll({ where: {habilidade_id: Number(Habilidade_id)}})
+            const TodasAsHabilidadesDasPessoas = await database.Niveis.findAll({ where: {habilidades_id: Number(id)}})
             return res.status(200).json(TodasAsHabilidadesDasPessoas)
         }catch(error){
             return res.status(500).json(error.message)
