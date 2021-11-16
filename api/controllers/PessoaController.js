@@ -28,13 +28,51 @@ class PessoaController{
     static async criaPessoa(req, res){
         const novaPessoa = req.body
         try{
-            const novaPessoaCriada = await database.Pessoas.create(novaPessoa)
+            const senhaHash = await bcrypt.hash(req.body.senha,8)
+
+            const novaPessoaCriada = await database.Pessoas.create({
+                ...novaPessoa,
+                senha: senhaHash
+            })
             return res.status(200).json(novaPessoaCriada)
 
         }catch (error){
             return res.status(500).json(error.message)
         }
     }
+
+
+    // modo login com post
+    static async loginPessoa(req, res){
+        const login = req.body
+        try{
+            if (login.email = await database.Pessoas.findOne({ where: { email: login.email } })){
+                const senhaHash = await bcrypt.compare(senha, senhaHash)
+                if (senhaHash){
+                // retorna objeto com token 
+                    return res.status(200).json(login)
+                }else{
+                    return res.status(400).json({ mensagem: `Senha errada ou usuário invalidos` })
+                }
+
+
+                
+            }else{
+                return res.status(401).json({ mensagem: `usuário não encontrado` })
+            }
+
+            
+
+
+            
+            
+
+        }catch (error){
+            return res.status(500).json(error.message)
+        }
+    }
+
+  
 
 
     static async atualizaPessoa(req, res){
