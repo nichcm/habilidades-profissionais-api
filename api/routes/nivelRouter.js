@@ -3,7 +3,7 @@ const NivelController = require('../controllers/NivelController')
 
 const router = Router()
 
-router.get('/niveis', NivelController.pegaTodosOsNiveis)
+router.get('/api/niveis', NivelController.pegaTodosOsNiveis)
 // router.get('/niveis/:id', NivelController.pegaUmNivel)
 // router.post('/niveis', NivelController.criaNivel)
 // router.put('/niveis/:id', NivelController.atualizaNivel)

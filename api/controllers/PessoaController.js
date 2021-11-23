@@ -1,6 +1,55 @@
 const database = require('../models')
+const bcrypt = require('bcrypt');
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const jwt = require('jsonwebtoken')
+const BearerStrategy = require('passport-http-bearer').Strategy
+
 
 class PessoaController{
+
+
+
+    static criaTokenJWT(usuario){
+        const payload = {
+            id: usuario.id
+        };
+        const token = jwt.sign(payload, 'senha-secreta', {
+            expiresIn:'6h'
+        });
+        return token;
+
+    }
+    static async loginPessoa(req, res){
+        const login = req.body
+        
+        try{
+            const pessoa = await database.Pessoas.findOne({ where: { email: login.email } })
+                
+                if (!pessoa){
+                    return res.status(400).json({ mensagem: `não pode ser inserido esse campo como nulo` }) 
+                }
+
+                const senhaHash = await bcrypt.compare(login.senha, pessoa.senha)
+                if (senhaHash){
+                        const token = PessoaController.criaTokenJWT(pessoa)
+                        
+                        return res.status(200).json({
+                            token, 
+                            pessoa: {   
+                                nome: pessoa.nome,
+                                email: pessoa.email,
+                                adm: pessoa.adm
+                            }
+                        })
+                    }else{
+                        return res.status(400).json({ mensagem: `Senha errada ou usuário invalidos` })
+                    }
+
+        }catch (error){
+            return res.status(500).json(error.message)
+        }
+    }
 
 
     //relações de uma unica pessoa:
@@ -43,34 +92,7 @@ class PessoaController{
 
 
     // modo login com post
-    static async loginPessoa(req, res){
-        const login = req.body
-        try{
-            if (login.email = await database.Pessoas.findOne({ where: { email: login.email } })){
-                const senhaHash = await bcrypt.compare(senha, senhaHash)
-                if (senhaHash){
-                // retorna objeto com token 
-                    return res.status(200).json(login)
-                }else{
-                    return res.status(400).json({ mensagem: `Senha errada ou usuário invalidos` })
-                }
-
-
-                
-            }else{
-                return res.status(401).json({ mensagem: `usuário não encontrado` })
-            }
-
-            
-
-
-            
-            
-
-        }catch (error){
-            return res.status(500).json(error.message)
-        }
-    }
+    
 
   
 

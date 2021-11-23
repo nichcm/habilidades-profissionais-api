@@ -3,13 +3,13 @@ const HabilidadeController = require('../controllers/HabilidadeController')
 
 const router = Router()
 
-router.get('/habilidades', HabilidadeController.pegaTodasAsHabilidades)
-router.get('/habilidades/:id', HabilidadeController.pegaUmaHabilidade)
-router.post('/habilidades', HabilidadeController.criaHabilidade)
-router.put('/habilidades/:id', HabilidadeController.atualizaHabilidade)
-router.delete('/habilidades/:id', HabilidadeController.apagaHabilidade)
+router.get('/api/habilidades', HabilidadeController.pegaTodasAsHabilidades)
+router.get('/api/habilidades/:id', HabilidadeController.pegaUmaHabilidade)
+router.post('/api/habilidades', HabilidadeController.criaHabilidade)
+router.put('/api/habilidades/:id', HabilidadeController.atualizaHabilidade)
+router.delete('/api/habilidades/:id', HabilidadeController.apagaHabilidade)
 
 
-router.get('/habilidades/:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
+router.get('/api/habilidades/:id/pessoas', HabilidadeController.pegaTodasAsPessoasDaMesmaHabilidade)
 
 module.exports = router
