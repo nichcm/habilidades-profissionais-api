@@ -22,12 +22,12 @@ class PessoaController{
     }
     static async loginPessoa(req, res){
         const login = req.body
-        
+        console.log(req.body)
         try{
             const pessoa = await database.Pessoas.findOne({ where: { email: login.email } })
                 
                 if (!pessoa){
-                    return res.status(400).json({ mensagem: `não pode ser inserido esse campo como nulo` }) 
+                    return res.status(400).json({ mensagem: `usuario nao encontrado` }) 
                 }
 
                 const senhaHash = await bcrypt.compare(login.senha, pessoa.senha)
@@ -36,7 +36,8 @@ class PessoaController{
                         
                         return res.status(200).json({
                             token, 
-                            pessoa: {   
+                            pessoa: { 
+                                id: pessoa.id,  
                                 nome: pessoa.nome,
                                 email: pessoa.email,
                                 adm: pessoa.adm
