@@ -1,5 +1,5 @@
 const database = require('../models')
-
+const { QueryTypes } = require('sequelize');
 
 class NivelController {
 
@@ -7,7 +7,7 @@ class NivelController {
     //pega todos os niveis
     //http://localhost:3000/niveis
     static async pegaTodosOsNiveis(req, res) {
-
+      
       try {
         const todasOsNiveis= await database.Niveis.findAll()
         return res.status(200).json(todasOsNiveis)
@@ -15,7 +15,23 @@ class NivelController {
         return res.status(500).json(error.message);
       }
     }
-
+    //get
+    static async pegaHabilidadesDaPessoa( req, res){
+      const { pessoaId } =  req.params
+      try {
+        const todasHabilidades = await database.sequelize
+        .query(
+          'SELECT h.titulo, n.nivel, n.experiencia, n.pessoas_id FROM niveis n INNER JOIN habilidades h ON n.habilidades_id = h.id WHERE n.pessoas_id = :pessoaId;',
+          {
+            replacements: { pessoaId },
+            type: database.sequelize.QueryTypes.SELECT
+          }
+        )
+        return res.status(200).json(todasHabilidades)
+      } catch (error) {
+        return res.status(500).json(error.message);
+      }
+    }
 
 
     //funções sem sentido:

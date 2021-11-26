@@ -87,7 +87,7 @@ class PessoaController{
             return res.status(200).json(novaPessoaCriada)
 
         }catch (error){
-            return res.status(500).json(error.message)
+            return res.status(500).json(error)
         }
     }
 
